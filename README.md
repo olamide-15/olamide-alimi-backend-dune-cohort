@@ -27,7 +27,7 @@ and Django Template Language (DTL).
 ## Setup Instructions
 
 1. Clone the repository:
-   git clone https://github.com/iyiade08/Olamide-alimi-backend-dune-cohort.git
+   git clone https://github.com/Olamide-alimi-backend-dune-cohort.git
 2. Navigate into the module-9 folder:
    cd Olamide-Alimi-backend-dune-cohort/module-9
 3. Create a virtual environment:
