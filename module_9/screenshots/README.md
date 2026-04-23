@@ -46,8 +46,8 @@ and Django Template Language (DTL).
 
 ## Screenshots
 
-![Home Page](screenshots/01_home_page.png)
-![Product List](screenshots/02_product_list.png)
-![Product Detail](screenshots/03_product_detail.png)
-![Category List](screenshots/04_category_list.png)
-![Project Structure](screenshots/05_project_structure.png)
+![Home Page](module_9/screenshots/10_home_page.png)
+![Product List](module_9/screenshots/14_product_list.png)
+![Product Detail](module_9/screenshots/13_product_detail.png)
+![Category List](module_9/screenshots/11_category_list.png)
+![Project Structure](module_9/screenshots/12_m9_project_structure.png)
