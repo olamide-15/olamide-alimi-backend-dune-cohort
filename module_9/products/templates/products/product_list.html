@@ -1,0 +1,25 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+<h1>Our Products 📦</h1>
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Price: ₦{{ product.price }}</p>
+                <p class="card-text">Category: {{ product.category }}</p>
+                {% if product.stock > 0 %}
+                <span class="badge bg-success">In Stock</span>
+                {% else %}
+                <span class="badge bg-danger">Out of Stock</span>
+                {% endif %}
+                <br><br>
+                <a href="/products/{{ product.id }}/" class="btn btn-dark btn-sm">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

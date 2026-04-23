@@ -1,0 +1,19 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<div class="card" style="max-width: 400px">
+    <div class="card-body">
+        <p><strong>Price:</strong> ₦{{ product.price }}</p>
+        <p><strong>Stock:</strong> {{ product.stock }}</p>
+        <p><strong>Category:</strong> {{ product.category }}</p>
+        {% if product.stock > 0 %}
+        <span class="badge bg-success">In Stock</span>
+        {% else %}
+        <span class="badge bg-danger">Out of Stock</span>
+        {% endif %}
+    </div>
+</div>
+<br>
+<a href="/products/" class="btn btn-dark">← Back to Products</a>
+{% endblock %}
