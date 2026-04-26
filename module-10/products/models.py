@@ -16,7 +16,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category ,
         on_delete = models.CASCADE,
-        related_name = 'Products'
+        related_name = 'products'
     )
 
     created_at = models.DateTimeField(auto_now_add = True)

@@ -27,9 +27,9 @@ and Django Template Language (DTL).
 ## Setup Instructions
 
 1. Clone the repository:
-   git clone https://github.com/iyiade08/allo-iyiade-backend-dune-cohort.git
+   git clone https://github.com/olamide-15/olamide-alimi-backend-dune-cohort.git
 2. Navigate into the module-9 folder:
-   cd allo-iyiade-backend-dune-cohort/module-9
+   cd-alimi-backend-dune-cohort/module-9
 3. Create a virtual environment:
    python -m venv venv
 4. Activate it:
