@@ -15,6 +15,13 @@ and Django Template Language (DTL).
 - **product_detail()** → `/products/<id>/` — Shows one product's details
 - **category_list()** → `/categories/` — Shows all categories and product counts
 - **about()** → `/about/` — About page
+- products/add/'
+- products/<int:pk>/edit/
+- products/<int:pk>/delete/
+
+- categories/add/
+- categories/<int:pk>/edit/
+- categories/<int:pk>/delete/
 
 ### Templates
 
@@ -23,6 +30,9 @@ and Django Template Language (DTL).
 - **product_list.html** — Product listing with for loop and if/else badges
 - **product_detail.html** — Single product detail page
 - **category_list.html** — Category listing with product counts
+- **category_confirm_delete
+- **category_form
+- **product_form
 
 ## Setup Instructions
 
@@ -46,8 +56,10 @@ and Django Template Language (DTL).
 
 ## Screenshots
 
-![Home Page](module_9/screenshots/10_home_page.png)
-![Product List](module_9/screenshots/14_product_list.png)
-![Product Detail](module_9/screenshots/13_product_detail.png)
-![Category List](module_9/screenshots/11_category_list.png)
-![Project Structure](module_9/screenshots/12_m9_project_structure.png)
+![category_create](module-10/screenshots/01_category_create_2.png)
+![category form](module-10/screenshots/02_category_form.png)
+![category added](module-10/screenshots/03_category-add.png)
+![home page](module-10/screenshots/04_home_page.png)
+![Product form](module-10/screenshots/05_product_form.png)
+![Product_sucess_message](module-10/screenshots/06_product_success_message.png)
+![validation page](module-10/screenshots/07_validation_page.png)

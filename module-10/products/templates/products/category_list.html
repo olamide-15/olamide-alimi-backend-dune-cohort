@@ -1,4 +1,4 @@
-{% extends 'products/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <h1>Categories 📂</h1>
@@ -12,6 +12,8 @@
                 <p class="card-text">
                     <strong>Number of Products:</strong> {{ category.product_count }}
                 </p>
+                <a href="{% url 'category_update' category.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'category_delete' category.pk %}" class="btn btn-sm btn-danger">Delete</a>
             </div>
         </div>
     </div>
