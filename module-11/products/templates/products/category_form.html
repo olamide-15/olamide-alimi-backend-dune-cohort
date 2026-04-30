@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if form.instance.pk %}
+        Edit category
+    {% else %}
+        Add category
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h2>
+        {% if form.instance.pk %}
+            Edit category
+        {% else %}
+            Add New category
+        {% endif %}
+    </h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <button type="submit">
+        {% if form.instance.pk %}
+            Update category
+        {% else %}
+            Save category
+        {% endif %}
+    </button>
+</form>
+
+{% if form.errors %}
+    <div style="margin-top:20px; color: red">
+        <h4>Errors:</h4>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                {% for errors in error %}
+                    <li><strong>{{ field}}</strong>: {{errors}}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+    <br>
+    <a href="{% url 'category_list' %}"> Back to Products</a>
+{% endblock %}

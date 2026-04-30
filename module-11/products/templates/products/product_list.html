@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Our Products 📦</h1>
+
+
+<div class="container">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" 
+                alt="{{ product.name }}"
+                style="width:100%; height:160px; object-fit:cover;">
+            {% else %}
+            <div style="width:100%; height:160px; background:#f0ebe4; 
+                        display:flex; align-items:center; justify-content:center;
+                        color:#6b5c47; font-size:.85rem;">
+            <p> No Image </p>
+            </div>
+        {% endif %}
+        
+        <div class="card">
+            <div class="cardbody">
+                <h5>{{ product.name }}</h5>
+                <p>Price: ₦{{ product.price }}</p>
+                <p>Category: {{ product.category }}</p>
+                {% if product.stock > 0 %}
+                <span class="stock">In Stock</span>
+                {% else %}
+                <span class="oos">Out of Stock</span>
+                {% endif %}
+                <a class="blue" href="/products/{{ product.id }}/">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
