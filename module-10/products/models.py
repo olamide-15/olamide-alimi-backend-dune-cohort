@@ -17,9 +17,15 @@ class Product(models.Model):
         Category ,
         on_delete = models.CASCADE,
         related_name = 'products'
-    )
+     )
 
-    created_at = models.DateTimeField(auto_now_add = True)
+    # image = models.ImageField(upload_to='products/', blank=True, null=True)
+    
+    is_available = models.BooleanField(default=True)
+    # stock = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True) 
+
+    # created_at = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
         return self.name

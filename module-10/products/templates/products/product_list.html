@@ -4,24 +4,24 @@
 <h1>Our Products 📦</h1>
 
 <form method="GET" action="">
-    <input type="text" name="q" value="{{ query }}" placeholder="Search products...">
+    <input type="text" name="product-name" value="{{ product_name }}" placeholder="Search products...">
     <button type="submit">Search</button>
 </form>
-<div class="row">
+<div class="pl">
     {% for product in products %}
-    <div class="col-md-3 mb-2">
+    <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">Price: ₦{{ product.price }}</p>
-                <p class="card-text">Category: {{ product.category }}</p>
+                <h5>{{ product.name }}</h5>
+                <p>Price: ₦{{ product.price }}</p>
+                <p>Category: {{ product.category }}</p>
                 {% if product.stock > 0 %}
-                <span class="badge bg-success">In Stock</span>
+                <span class="stock">In Stock</span>
                 {% else %}
-                <span class="badge bg-danger">Out of Stock</span>
+                <span class="oos">Out of Stock</span>
                 {% endif %}
                 <br><br>
-                <a href="/products/{{ product.id }}/" class="btn btn-dark btn-sm">View Details</a>
+                <a href="/products/{{ product.id }}/">View Details</a>
             </div>
         </div>
     </div>
