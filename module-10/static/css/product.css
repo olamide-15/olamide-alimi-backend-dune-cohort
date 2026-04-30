@@ -4,8 +4,19 @@
     box-sizing: border-box;
 }
 
+.container{
+    display: flex;
+    gap: 20px;
+}
+
+.product-card{
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 400px;
+}
+
 .card{
-    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
@@ -16,6 +27,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 
 .stock{
     background-color: #28a745;
@@ -32,4 +44,5 @@
 
 a{
     text-decoration: none;
+    color: blue;
 }

@@ -37,6 +37,12 @@ nav {
   gap: 10px;
 }
 
+.navRight {
+  /* display: flex; */
+  justify-content: space-between;
+  gap: 15px;
+}
+
 /* Nav links */
 .nav-links a {
   color: #ffffff;

@@ -2,18 +2,18 @@
 
 {% block content %}
 <h1>{{ product.name }}</h1>
-<div class="card" style="max-width: 300px">
+<div class="card" >
     <div class="card-body">
         <p><strong>Price:</strong> ₦{{ product.price }}</p>
         <p><strong>Stock:</strong> {{ product.stock }}</p>
         <p><strong>Category:</strong> {{ product.category }}</p>
         {% if product.stock > 0 %}
-        <span class="badge bg-success">In Stock</span>
+        <span class="bad1">In Stock</span>
         {% else %}
-        <span class="badge bg-danger">Out of Stock</span>
+        <span class="bad2">Out of Stock</span>
         {% endif %}
     </div>
 </div>
 <br>
-<a href="/products/" class="btn btn-dark">← Back to Products</a>
+<a href="/products/" class="btn">← Back to Products</a>
 {% endblock %}

@@ -22,5 +22,5 @@ class ProductAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name',]
     search_fields = ['name']
-    list_filter = ['category', 'is_available']
-    
+
+
