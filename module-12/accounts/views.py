@@ -28,3 +28,14 @@ def dashboard(request):
     return render(request, 'accounts/dashboard.html', {'user': request.user})
 
 
+# # Check what's actually been modified but not staged
+# git status
+
+# # Stage everything including changes (not just renames)
+# git add .
+
+# # Commit properly
+# git commit -m "Add authentication and fix product delete permissions"
+
+# # Push
+# git push origin main
