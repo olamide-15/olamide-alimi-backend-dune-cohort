@@ -7,12 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}ToriloShop{% endblock %}</title>
   <!-- {% static 'path' %} generates the correct URL to the file -->
-  <link rel='stylesheet' href="{% static 'css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'css/product.css' %}">
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
-  <link rel="stylesheet" href="{% static 'css/detail.css' %}">  
-
-
+  <link rel='stylesheet' href="{% static 'css/main.css' %}"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   
 </head>
 <body>
@@ -24,15 +20,31 @@
       <img src="{% static 'images/logo.png' %}" alt="ToriloShop Logo">
     </a>
     <div class="navRight">
-       <form method="GET" action="">
+       <form method="GET" action="" class="form">
             <input type="text" name="product-name" value="{{ product_name }}" placeholder="Search products...">
-            <button type="submit">Search</button>
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
        </form>
 
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/products">Products</a>
+        <a href="{% url 'product_list' %}">Products</a>
         <a href="/about">About</a>
+
+        {% if user.is_authenticated %}
+        <!-- show only to logged-in users -->
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <span style="color: white; padding: 8px 16px;">Hello, {{ request.user.username }}</span>
+
+        <!-- Corrected logout: Must use POST for Django 5.0+ -->
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="nav-link-btn">Logout</button>
+        </form>
+        {% else %}
+          <!-- Shown only to loggged-out visitors -->
+          <a href="{% url 'login' %}">Login</a>
+          <a href="{% url 'register' %}">Register</a>
+        {% endif %}
       </div>
     </div>
    

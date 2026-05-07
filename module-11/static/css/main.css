@@ -40,7 +40,30 @@ nav {
 .navRight {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 15px;
+}
+
+.navRight .form{
+  display: flex;
+}
+
+.form input{
+  border: none;
+  padding: 5px 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  outline: none;
+}
+
+.form button{
+  border: none;
+  padding: 5px 10px;
+  background-color: #333;
+  color: white;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
 }
 
 /* Nav links */
@@ -112,4 +135,235 @@ footer {
   main {
     padding: 0 1rem;
   }
+}
+
+
+/* Button styling using the navbar palette*/
+.btn-auth {
+    width: 100%;
+    background: #1a1a2e;
+    margin-top: 10px;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-auth:hover {
+    background: #16213e; /* Matches navbar hover */
+}
+
+.auth-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+/* Makes the Logout button look like a standard nav link */
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+} 
+
+.nav-link-btn:hover {
+  background: #16213e;
+  transform: translateY(-1px);
+}
+/* ===== AUTHENTICATION & DASHBOARD STYLING ===== */
+
+/* Container to center cards horizontally and vertically */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+    min-height: 60vh;
+}
+
+/* The card style for Login, Register, and Dashboard */
+.auth-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-card h2 {
+    color: #1a1a2e; /* Brand color from navbar */
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+/* Dashboard specific data layout */
+.dashboard-info p {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+
+.badge {
+    background: #eef2ff;
+    color: #1a1a2e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.form-group p {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+/* === home page ==== */
+.btn1{
+    border-radius: 2px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+}
+
+.btn2{
+    border-radius: 2px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+}
+
+.btnGrp{
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+
+/* ==== detail page */
+.card{
+    /* border: 1px solid #ccc; */
+    display: flex;
+    align-items: center;
+}
+
+.card-body{
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    align-items: center;
+    text-align: center;
+    max-width: 150px;
+}
+
+.bad1{
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.bad2{
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+/* ===product=== */
+
+.form{
+  width: 100%;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+img{
+    border-radius: 5px;
+}
+
+.product-card{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card{
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cardbody{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    border: none;
+}
+
+
+.stock{
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.oos{
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.blue{
+    text-decoration: none;
+    color: blue;
 }

@@ -3,8 +3,13 @@
 {% block content %}
 <h1>Our Products 📦</h1>
 
+<form method="GET" action="" class="form">
+    <input type="text" name="product-name" value="{{ product_name }}" placeholder="Search products...">
+    <button type="submit">Search</button>
+</form>
 
 <div class="container">
+    
     {% for product in products %}
     <div class="product-card">
         {% if product.image %}

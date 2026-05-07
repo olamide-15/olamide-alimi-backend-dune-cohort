@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required 
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Product, Category
 from .forms import ProductForm, CategoryForm
@@ -61,7 +62,7 @@ def category_delete(request, pk):
         return redirect('category_list')
     return render(request,'products/category_confirm_delete.html', {'category': category})
     
-
+@login_required
 def product_create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -77,6 +78,7 @@ def product_create(request):
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
+        
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
@@ -85,17 +87,22 @@ def product_update(request, pk):
     else:
         form = ProductForm(instance=product)
         return render (request,'products/product_form.html', {'form': form})
-    
+
+@login_required   
 def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
+
+    # Resrict to staff
+    if not request.user.is_staff:
+        messages.error(request, "You are not authorized to delete this product.")
+        return redirect('product_list')
+    
     if request.method =='POST':
         product_name = product.name
         product.delete()
-
         messages.success(request, f'{product_name} deleted sucessfully.')
         return redirect('product_list')
     return render(request,'products/product_confirm_delete.html', {'product': product})
-
 
 
 # def custom_404(request, exception):

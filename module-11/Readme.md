@@ -1,84 +1,58 @@
-### README
+## ReadME
 
 
-## Project Description
+ # ToriloShop - Django Project
+ 
+ ## Project Description
+ TorilоShop is a Django-based e-commerce application. This update adds a complete user authentication system, including login, logout, registration, and route protection, along with dynamic navbar changes based on login state.
+ 
+ ## Features Implemented
+ 
+- User registration — new users can create an account via a signup form
+- Login / logout — session-based authentication using Django's built-in auth system
+- Protected routes — pages like product add and delete require the user to be logged in; non-staff users are blocked from destructive actions
+- Staff-only delete — only users with is_staff = True can delete products; others receive a  messages.error("You are not authorized to delete this product.")
 
-### What is Toriloshop all about?
-  Toriloshop project is all about a website that helps to make everday shopping easier and stressfree. it provide a seamless online shopping experience where users can shopacross a varity of product categories.
+Navbar changes
 
-# Models
- Toriloshop currently has the followingmodels:
-
-** Category - this model organise product into groups for easy browsing.
-** Product - this model represent individual items available for purchase,linked to a category.
-
-### Features Implemented
-**Home View (`/`)**: Landing page for toriloshop.
-- Product List View (`/products/`)**: Displays a catalog of available items.
-- About View (`/about/`)**: Information regarding the store's history and mission.
-- Custom 404 Error Page
-
-### Category Model
-name - the name of the category
-description - the description of the item in the category
-
-### Product Model
-name - name of item
-category - ForeignKey linking the product to a category
-price - the price of the product
-stock - the number of item in stock
-
-# ORM Operations
-deleted a single product using `p=Product.objects.get(id=x), p.delete()`
-deleted all product using `Product.objects.all().delete()`
-Retrieved all products using `Product.objects.all()`
-Filtered products using `Product.objects.filter()`
-Retrived a single product using`Product.objects.get()`
-
-
-
-
-### Setup steps
-* a virtual environment was created using - `python -m venv venv`
-* activate the virtusl environment using - `venv/Scripts/activate`
-* django was installed into the creted virtual environment using - `pip install django`
-* The project toriloshop was created with the code - `django-admin startproject toriloshop`
-* the apps products and users were created using -`python manage.py startapp products/python manage.py startapp users`
-* to migrate - `python manage.py.makemigrations`
-after this you migrate using -`python manage.py.migrate`
-* to create a superuser `python manage.py createsuperuser`
-* to run all that has has been done on the has been done in the apps with the code - `python manage.py runserver`
-* 
-
-#### Embedded screenshots using Markdown
-all this are in the screenshot folder
-# Project Screenshots
-
-Home Page
-![Home Page](screenshots/01_home_page.png) <br><br>
-
-Products Page
-![Products Page](screenshots/02_product_page.png)
-<br><br>
-
-About
-![About page](screenshots/03_About_page.png)
-
-
-Project Structure 
-![Project Structure](screenshots/04_project_structure.png)
-
- Product by Category
-![Project Category](screenshots/05_product_by_cat.png)
-
- All product
- ![screenshot_6](screenshots/06_all_products.png)
-
- Products with price > 5000
- ![screenshot_7](screenshots/07_price.png)
-
- updated price and a delected product
- ![screenshot_8](screenshots/08_shell_section.png)
-
- Admin panel
- ![screenshot_9](screenshots/09_admin_panel.png)
+- Logged-out users see Login and Register links
+- Logged-in users see their username and a Logout link
+- Staff users see additional Add Product and management links
+ 
+ 
+ 
+ ## Setup Instructions
+ 
+ 1. Clone the repository:
+    git clone https://github.com/olamide-15/olamide-alimi-backend-dune-cohort.git
+ 2. Navigate into the module-12 folder:
+    cd-alimi-backend-dune-cohort/module-12
+ 3. Create a virtual environment:
+    python -m venv venv
+ 4. Activate it:
+    venv\Scripts\activate
+ 5. create a new app account and add to installed app in the project setttings.py
+ 6. create a new urls.py and forms.py and fill in it nececities
+ 7. create a new directory in your template named accounts 
+ 8. create three new file under template/accounts [login.html, register.html, dashboard.html]
+ 9. update product views and add restriction for who can delete products
+ 10. update the urls of the main project by including accounts to the url
+ 11. add Conditional content in base.html templates based on login state
+ 15. Run the server:
+    python manage.py runserver
+ 16. Open browser at `http://127.0.0.1:8000/`
+ 
+ ## Screenshots
+ 
+ ![01_login_page](screenshots/01_login_page.png)
+ 
+ ![02_register_page](screenshots/02_register_page.png)
+ 
+ ![03_protected_route_redirect](screenshots/03_protected_route_redirect.png)
+ 
+ ![04_logged_in_navbar](screenshots/04_logged_in_navbar.png)
+ 
+ ![05_logged_out_navbar](screenshots\05_logged_out_navbar.png)
+ 
+ 
+ 
