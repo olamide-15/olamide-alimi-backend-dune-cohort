@@ -18,11 +18,29 @@ from django.contrib import admin
 from django.conf import settings 
 from django.conf.urls.static import static
 from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', include('products.urls')),
     path('', include('accounts.urls')),
+    path('api/token/', obtain_auth_token, name='api_token') 
+ 
 ]
 
 if settings.DEBUG:    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Optional : customise JWT settings (e.g. token lifetime, signing algorithm, etc.)
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+ }
+
+CORS_ALLOW_ALL_ORIGINS = True

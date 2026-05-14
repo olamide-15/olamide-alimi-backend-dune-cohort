@@ -8,7 +8,16 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ProductSerializers, CategorySerializers
+from .serializers import ProductSerializer, CategorySerializer
+from rest_framework.permissions import IsAuthenticated
+
+# from .pagination import ProductPagination
+# from rest_framework.generics import ListAPIView
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
+from .pagination import StandardResultsPagination
+
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 def home(request):
     return render(request, 'products/home.html')
@@ -72,13 +81,17 @@ def category_delete(request, pk):
         return redirect('category_list')
     return render(request,'products/category_confirm_delete.html', {'category': category})
     
+
+    # PRODUCT VIEWS
 @login_required
 def product_create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save() 
-            messages.success(request, 'product was added  sucessesfully')
+            product = form.save(commit=False)
+            product.created_by = request.user
+            product.save() 
+            messages.success(request, 'Product was added  sucessesfully')
             return redirect('product_list') 
     else:
         form = ProductForm()
@@ -87,8 +100,14 @@ def product_create(request):
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
+
+    # only creator can edit
+    if product.created_by != request.user:
+        messages.error(request, 'You are not authorized to edit this product.')
+        return redirect('product_list')
+
+
     if request.method == 'POST':
-        
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
@@ -102,6 +121,10 @@ def product_update(request, pk):
 def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
+    # only the creator can delete
+    if product.created_by != request.user:
+        messages.error(request, 'You are not authorised to delete this product.')
+
     # Resrict to staff
     if not request.user.is_staff:
         messages.error(request, "You are not authorized to delete this product.")
@@ -114,6 +137,8 @@ def product_delete(request, pk):
         return redirect('product_list')
     return render(request,'products/product_confirm_delete.html', {'product': product})
 
+
+# JSON views
 def product_list_json(request):
     products = Product.objects.all()
     data = [{'id': p.id, 
@@ -148,18 +173,33 @@ def category_detail_json(request, pk):
     except Category.DoesNotExist:
         return JsonResponse({'error': 'Category not found'}, status=404)
     
-class ProductListAPIView(APIView):
-    def get(self, request):
-        products = Product.objects.all()
-        serializer = ProductSerializers(products, many=True)
-        return Response(serializer.data)
 
-    def post(self, request):
-        serializer = ProductSerializers(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# DRF API Views
+    
+class ProductListAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    pagination_class = StandardResultsPagination
+    filterset_fields = ['category', 'is_available']
+    search_fields = ['name',]
+    ordering_fields = ['price', 'created_at', 'stock']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
+    # def get(self, request):
+    #     products = Product.objects.all()
+    #     serializer = ProductSerializer(products, many=True)
+    #     return Response(serializer.data)
+
+    # def post(self, request):
+    #     serializer = ProductSerializer(data = request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProductDetailAPIView(APIView):
     def get_object(self, pk):
@@ -172,14 +212,14 @@ class ProductDetailAPIView(APIView):
         product = self.get_object(pk)
         if product is None:
             return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = ProductSerializers(product)
+        serializer = ProductSerializer(product)
         return Response(serializer.data)
     
     def put(self, request, pk):
         product = self.get_object(pk)
         if product is None:
             return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = ProductSerializers(product, data=request.data)
+        serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -199,13 +239,14 @@ class ProductDetailAPIView(APIView):
         return Response({'message': 'Product deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
         
 class CategoryListAPIView(APIView):
+
     def get(self, request):
         categories = Category.objects.all()
-        serializer = CategorySerializers(categories, many=True)
+        serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = CategorySerializers(data = request.data)
+        serializer = CategorySerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -222,14 +263,14 @@ class CategoryDetailAPIView(APIView):
         category = self.get_object(pk)
         if category is None:
             return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = CategorySerializers(category)
+        serializer = CategorySerializer(category)
         return Response(serializer.data)
     
     def put(self, request, pk):
         category = self.get_object(pk)
         if category is None:
             return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = CategorySerializers(category, data=request.data)
+        serializer = CategorySerializer(category, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -244,3 +285,14 @@ class CategoryDetailAPIView(APIView):
 
 # def custom_404(request, exception):
 #     return render(request, 'products/home.html', status=404)
+
+class ProductCreateAPIView(APIView):
+    # Only authenticated users can reach this view
+    # Unauthenticated requests get a 401 Unauthorized response automatically
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
