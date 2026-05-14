@@ -27,7 +27,7 @@ JSON Web Tokens — a stateless auth method. The client obtains an access token
 Cross-Origin Resource Sharing headers allow any frontend (React, Vue, mobile app)
 to call the API from a different domain or port.
 
-4. 4. Pagination
+4. Pagination
 All list endpoints return 6 products per page with a structured envelope:
 ### Testing with Postman
 
