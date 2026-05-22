@@ -33,6 +33,6 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Category) 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name',]
-    search_fields = ['name']
+    search_fields = ['name', 'category_name']
 
 

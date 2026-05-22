@@ -180,3 +180,10 @@ Then open your browser at: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 ![collectstatic_output](screenshots/02_collectstatic_output.png)
 ![requirement_txt](screenshots/03_requirements text.png)
 ![env_excluded](screenshots/04_gitignore_env_excluded.png)
+
+
+
+
+
+
+postgresql://toriloshop_db_k39d_user:MSlTUpu9xFhlgRmL0tFa7q3bRr5tJgDd@dpg-d883crmq1p3s73fse800-a/toriloshop_db_k39d
